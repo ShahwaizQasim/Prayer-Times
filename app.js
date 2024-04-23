@@ -1,5 +1,6 @@
 let form = document.querySelector("#prayerTimes");
 let user_inp = document.querySelector("#cityname");
+let namaztime = document.querySelector("#namazTime")
 let fajrNamaz_print = document.querySelector("#fajr");
 let zohrNamaz_print = document.querySelector("#zohr");
 let asarNamaz_print = document.querySelector("#asar");
@@ -11,51 +12,37 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
 
   let UserInputValue = user_inp.value;
+
+
+  let pakistanCities = ['Karachi','Islamabad','Lahore','Multan','Rawalpindi','Hyderabad','MirphurKhas', 'Sukkar','Jamshoro','Sialkot','Faislabad','Quetta'];
+  let firstAlpha = UserInputValue.slice(0,1).toUpperCase();
+  let baqiAlpha = UserInputValue.slice(1).toLowerCase();
+  let finalWordCity = firstAlpha + baqiAlpha;
+
+  if (!pakistanCities.includes(finalWordCity)) {
+    alert("Enter a Correct City Name!");
+  }
+
+  let date = new Date().toISOString().slice(0, 10);
+
+  const API = `https://api.aladhan.com/v1/timingsByCity/${date}?city=${finalWordCity}&country=Pakistan`;
+  
+
   // Make API request
-  fetch(`https://api.aladhan.com/v1/timingsByCity/20-04-2024?city=${user_inp}&country=${country}n&method=8`)
+  fetch(API)
   .then(response => response.json())
   .then(data => {
     // Store prayer times data
-    UserInputValue = data;
-
-    fajrNamaz_print.innerHTML = UserInputValue.data.timings.Fajr + " " + "AM";
-    zohrNamaz_print.innerHTML = UserInputValue.data.timings.Dhuhr + " " + "PM";
-    asarNamaz_print.innerHTML = UserInputValue.data.timings.Asr + " " + "PM";
-    magribNamaz_print.innerHTML = UserInputValue.data.timings.Maghrib + " " + "PM";
-    eshaNamaz_print.innerHTML = UserInputValue.data.timings.Isha + " " + "PM";
+    finalWordCity = data;
+    namaztime.innerHTML =  `${UserInputValue} Namaz Timings`;
+    fajrNamaz_print.innerHTML = `Fajr: ${finalWordCity.data.timings.Fajr} AM`;
+    zohrNamaz_print.innerHTML = `Zohr: ${finalWordCity.data.timings.Dhuhr} PM`;
+    asarNamaz_print.innerHTML = `Asr: ${finalWordCity.data.timings.Asr} PM`;
+    magribNamaz_print.innerHTML = `Maghrib: ${finalWordCity.data.timings.Maghrib} PM`;
+    eshaNamaz_print.innerHTML = `Isha: ${finalWordCity.data.timings.Isha} PM`;
     
    
   })
   .catch(error => console.error('Error fetching prayer times:', error));
   
 });
-
-
-// function fetchPrayerTimes(){
-//     //const apikey = fetch("https://api.aladhan.com/v1/timingsByCity/20-04-2024?city=karachi&country=%27%27&method=8");
-
-//     fetch("https://api.aladhan.com/v1/timingsByCity/20-04-2024?city=karachi&country=%27%27&method=8")
-//     .then((response) => response.json())
-//     .then((data) => {
-
-//       // Store prayer times data
-//       UserInputValue = data;
-
-//       // Call function to update UI with prayer times
-//       updatePrayerTimesUI();
-//     })
-//     .catch((error) => console.error("Error fetching prayer times:", error));
-
-// }
-
-// // Update UI with prayer times
-// function updatePrayerTimesUI() {
-//     // Access prayer times data and update HTML elements
-//     fajr_Namaztime_print.innerText = UserInputValue.fajr;
-//     zohr_Namaztime_print.innerText = UserInputValue.zohar;
-//     asar_Namaztime_print.innerText = UserInputValue.asar;
-//     magrib_Namaztime_print.innerText = UserInputValue.magrib;
-//     esha_Namaztime_print.innerText = UserInputValue.esha;
-// }
-//   // Call fetchPrayerTimes() when the page loads
-//   window.onload = fetchPrayerTimes;
