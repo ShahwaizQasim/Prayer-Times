@@ -12,13 +12,6 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
 
   let UserInputValue = user_inp.value;
-   
-  namaztime.innerHTML = " ";
-  fajrNamaz_print.innerHTML = " ";
-  zohrNamaz_print.innerHTML = " ";
-  asarNamaz_print.innerHTML = " ";
-  magribNamaz_print.innerHTML = " ";
-  eshaNamaz_print.innerHTML =  " ";
 
   let pakistanCities = ['Karachi','Islamabad','Lahore','Multan','Rawalpindi','Hyderabad','MirphurKhas', 'Sukkar','Jamshoro','Sialkot','Faislabad','Quetta'];
   let firstAlpha = UserInputValue.slice(0,1).toUpperCase();
