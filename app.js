@@ -12,7 +12,13 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
 
   let UserInputValue = user_inp.value;
-
+   
+  namaztime.innerHTML = " ";
+  fajrNamaz_print.innerHTML = " ";
+  zohrNamaz_print.innerHTML = " ";
+  asarNamaz_print.innerHTML = " ";
+  magribNamaz_print.innerHTML = " ";
+  eshaNamaz_print.innerHTML =  " ";
 
   let pakistanCities = ['Karachi','Islamabad','Lahore','Multan','Rawalpindi','Hyderabad','MirphurKhas', 'Sukkar','Jamshoro','Sialkot','Faislabad','Quetta'];
   let firstAlpha = UserInputValue.slice(0,1).toUpperCase();
@@ -20,8 +26,8 @@ form.addEventListener("submit", (event) => {
   let finalWordCity = firstAlpha + baqiAlpha;
 
   if (!pakistanCities.includes(finalWordCity)) {
-    alert("Enter a Correct City Name!");
-  }
+    alert("Enter a Correct City Name");
+  }else{
 
   let date = new Date().toISOString().slice(0, 10);
 
@@ -32,17 +38,22 @@ form.addEventListener("submit", (event) => {
   fetch(API)
   .then(response => response.json())
   .then(data => {
-    // Store prayer times data
-    finalWordCity = data;
-    namaztime.innerHTML =  `${UserInputValue} Namaz Timings`;
-    fajrNamaz_print.innerHTML = `Fajr: ${finalWordCity.data.timings.Fajr} AM`;
-    zohrNamaz_print.innerHTML = `Zohr: ${finalWordCity.data.timings.Dhuhr} PM`;
-    asarNamaz_print.innerHTML = `Asr: ${finalWordCity.data.timings.Asr} PM`;
-    magribNamaz_print.innerHTML = `Maghrib: ${finalWordCity.data.timings.Maghrib} PM`;
-    eshaNamaz_print.innerHTML = `Isha: ${finalWordCity.data.timings.Isha} PM`;
-    
+   console.log(data.code);
+
+    if (data.code === 200) {
+      
+      // Store prayer times data
+      finalWordCity = data;
+      namaztime.innerHTML =  `${UserInputValue} Namaz Timings`;
+      fajrNamaz_print.innerHTML = `Fajr: ${finalWordCity.data.timings.Fajr} AM`;
+      zohrNamaz_print.innerHTML = `Zohr: ${finalWordCity.data.timings.Dhuhr} PM`;
+      asarNamaz_print.innerHTML = `Asr: ${finalWordCity.data.timings.Asr} PM`;
+      magribNamaz_print.innerHTML = `Maghrib: ${finalWordCity.data.timings.Maghrib} PM`;
+      eshaNamaz_print.innerHTML = `Isha: ${finalWordCity.data.timings.Isha} PM`;
+      
+    }
    
   })
   .catch(error => console.error('Error fetching prayer times:', error));
-  
+}
 });

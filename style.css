@@ -7,9 +7,10 @@
 }
 body{
     height: 100vh;
-    background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url(./img/pexels-konevi-2236674.jpg);
+    background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url(./img/pexels-konevi-2236674.jpg);
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     position: relative;
@@ -17,7 +18,7 @@ body{
 .container{
     height: auto;
     width: 450px;
-    background-color: rgba(251, 183, 83, 0.1);
+    background-color: rgba(251, 183, 83, 0.2);
     padding-bottom: 50px;
     position: absolute;
     left: 250px;
@@ -29,7 +30,7 @@ h1{
     margin-top: 30px;
     font-family: "Montserrat", sans-serif;
     color: rgba(251, 183, 83, 1);
-    text-shadow: 1px 1px 2px #000;
+    text-shadow: 1px 1px 6px #000;
 }
 
 .input2{
@@ -41,7 +42,6 @@ h1{
     outline: none;
     padding: 8px;
     font-size: 1rem;
-    color: #fff;
     margin-top: 30px;
     font-family: "Montserrat", sans-serif;
 }
@@ -54,18 +54,16 @@ h1{
     border: 2px solid rgba(251, 183, 83, 1);
 }
 #namazTime{
-    padding-top: 15px;
+    margin-top: 30px;
 }
 h3{
     font-family: "Montserrat", sans-serif;
     color: rgba(251, 183, 83, 1);
-    text-shadow: 1px 1px 2px #000;
+    text-shadow: 1px 1px 4px #000;
     font-size: 1.2rem;
-    padding-top: 10px;
+    margin-top: 20px;
 }
-#esha{
-    padding-bottom: 15px;
-}
+
 button{
     height: 45px;
     width: 40%;
@@ -76,6 +74,8 @@ button{
     font-weight: 600;
     font-family: "Montserrat", sans-serif;
     border: 1px solid rgba(251, 183, 83, 0.2);
+    margin-top: 25px;
+    box-shadow: 1px 1px 4px #000;
     transition: 0.6s;
 }
 button:hover{
@@ -87,4 +87,53 @@ button:hover{
  button:active{
    background-color: white;
    color: rgba(251, 183, 83, 1);
+ }
+
+ @media screen and (max-width:1024px) {
+    body{
+        background-repeat: no-repeat;
+        background-position: fixed;
+    }
+    .container{
+        position: absolute;
+        left: 150px;
+        top: 200px;
+    }
+ }
+ @media screen and (max-width:750px) {
+    body{
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+    }
+    .container{
+        position: absolute;
+        left: 100px;
+        top: 180px;
+    }
+ }
+ @media screen and (max-width:600px) {
+    body{
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+    }
+    .container{
+        position: absolute;
+        left: 10%;
+        top: 180px;
+    }
+ }
+ @media screen and (max-width:550px) {
+    body{
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+    }
+    .container{
+        width: 80%;
+        position: absolute;
+        left: 5%;
+        top: 180px;
+    }
  }
