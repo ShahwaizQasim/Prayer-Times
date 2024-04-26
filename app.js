@@ -22,7 +22,8 @@ form.addEventListener("submit", (event) => {
     alert("Enter a Correct City Name");
   }else{
 
-  let date = new Date().toISOString().slice(0, 10);
+  let date = new Date().toDateString();
+  console.log(date);
 
   const API = `https://api.aladhan.com/v1/timingsByCity/${date}?city=${finalWordCity}&country=Pakistan`;
   
@@ -31,13 +32,19 @@ form.addEventListener("submit", (event) => {
   fetch(API)
   .then(response => response.json())
   .then(data => {
-   console.log(data.code);
+   //console.log(data.code);
 
     if (data.code === 200) {
       
       // Store prayer times data
       finalWordCity = data;
-      namaztime.innerHTML =  `${UserInputValue} Namaz Timings`;
+      //console.log(finalWordCity.data.timings.Asr);
+
+      // if (finalWordCity.data.timings.Asr > 12) {
+      //   finalWordCity.data.timings.Asr = finalWordCity.data.timings.Asr - 12;
+      // }
+
+      namaztime.innerHTML =  `Namaz Timings of ${UserInputValue}`;
       fajrNamaz_print.innerHTML = `Fajr: ${finalWordCity.data.timings.Fajr} AM`;
       zohrNamaz_print.innerHTML = `Zohr: ${finalWordCity.data.timings.Dhuhr} PM`;
       asarNamaz_print.innerHTML = `Asr: ${finalWordCity.data.timings.Asr} PM`;
